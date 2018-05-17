@@ -29,6 +29,8 @@ parser.set_defaults(proxy="9050")
 
 args = parser.parse_args()
 
+# The url that will be use to check
+# the ip address.
 
 ipcheck_url = 'http://canihazip.com/s'
 
@@ -53,7 +55,7 @@ try:
 
     print(Fore.GREEN + Style.BRIGHT + "Succesfully connected with tor!" + Fore.RESET)
     print(Fore.WHITE + Style.BRIGHT + "Old IP = " + Fore.BLUE + old_ip + Fore.RESET)
-    print(Fore.WHITE + Style.BRIGHT + "New IP = " + Fore.BLUE + tor_ip + Fore.RESET)
+    print(Fore.WHITE + Style.BRIGHT + "Tor IP = " + Fore.BLUE + tor_ip + Fore.RESET)
 
     # When a connection is made send a request to 
     # the target and print the http code
@@ -80,7 +82,11 @@ except requests.exceptions.ConnectionError as e:
     sys.exit(0)
 
 except requests.exceptions.RequestException as e:
-    print(Fore.RED + Style.BRIGHT + e + Fore.RESET)
+    print(Fore.RED + Style.BRIGHT + "Unexpected exception!" + Fore.RESET)
+
+    print("\n")
+    print(Fore.MAGENTA + Style.BRIGHT + "Traceback: " + Fore.RESET)
+    print(e)
     sys.exit(0)
 
 sys.exit(0)
